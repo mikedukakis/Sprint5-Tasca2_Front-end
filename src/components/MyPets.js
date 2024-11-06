@@ -102,6 +102,31 @@ function MyPets() {
     }
   };
 
+  // Delete pet handler
+  const handleDelete = async () => {
+    if (!selectedPet) return;
+
+    try {
+      const token = localStorage.getItem('access_token');
+      const response = await fetch(`http://localhost:8080/virtualpet/pet/delete/${selectedPet.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setPets(prevPets => prevPets.filter(pet => pet.id !== selectedPet.id));
+        setSelectedPet(null); // Deselect pet after deletion
+      } else {
+        console.error("Failed to delete the pet.");
+      }
+    } catch (error) {
+      console.error("Connection error:", error);
+    }
+  };
+
   // Select a pet and track it as the active pet
   const handleSelectPet = (pet, event) => {
     event.stopPropagation();
@@ -123,6 +148,7 @@ function MyPets() {
   return (
     <div className="mypets-container">
       <h2>My Pets</h2>
+      <button className="create-pet-button" onClick={() => navigate('/createpet')}>Create New Pet</button>
       {loading ? (
         <p>Loading your pets...</p>
       ) : pets.length > 0 ? (
@@ -153,6 +179,12 @@ function MyPets() {
                     disabled={selectedPet.happy} // Enable only if happy is false
                   >
                     Pet
+                  </button>
+                  <button 
+                    onClick={handleDelete} 
+                    className="delete-button" // Additional styling for delete button
+                  >
+                    Delete
                   </button>
                 </div>
               )}
