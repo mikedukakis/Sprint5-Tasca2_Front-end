@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# 🐾 Virtual Pet Frontend
+<br/>
+<br/>
+A responsive React-based frontend for managing virtual pets, allowing users to interact with their pets, monitor their states, and perform actions such as feeding and petting. This frontend integrates with a Spring Boot backend and communicates through a REST API. 
+<br/>
+<br/>
+###📄 Project Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Virtual Pet Frontend offers users an engaging interface to create and manage their virtual pets. Key features include user authentication, pet management, and interactive pet actions. All actions are reflected in real time with backend synchronization, using a combination of React state management and API calls.
+<br/>
+<br/>
+###💻 Technologies Used
 
-## Available Scripts
+    React
+    JavaScript (ES6+)
+    HTML/CSS
+    React Router
+    Fetch API for REST API communication
+    JSON Web Token (JWT) for secure requests
+    npm for package management
 
-In the project directory, you can run:
+<br/>
+<br/>
+###📋 Requirements
 
-### `npm start`
+    Node.js v14+
+    npm v6+
+    Access to the backend API (Virtual Pet API) running on localhost:8080
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
+<br/>
+###🛠️ Installation
+#####1. Clone this repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`git clone https://github.com/yourusername/virtual-pet-frontend.git`
 
-### `npm test`
+#####2. Navigate to the project directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`cd virtual-pet-frontend`
 
-### `npm run build`
+#####3. Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#####4. Configure the frontend application:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ensure the backend API URL (http://localhost:8080) is accessible and update any API base paths in src/config.js if required.
 
-### `npm run eject`
+<br/>
+<br/>
+###▶️ Execution
+#####1. Start the frontend application:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`npm start`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#####2. Access the application in your browser:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br/>
+<br/>
+###🌐 Frontend Features
 
-## Learn More
+    User Authentication: Login and registration functionality integrated with backend JWT authentication.
+    Pet Management: Create, update, and delete pets.
+    Interactive Pet Actions: Users can feed and pet their pets, with the pet’s mood and hunger status reflected in real time.
+    Responsive UI: Optimized for various screen sizes and devices.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br/>
+<br/>
+###📚 Key Components and Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    Login.js: Manages user login, sending credentials to the backend and storing JWTs in local storage for secure sessions.
+    MyPets.js: The main component displaying the user’s pets, with options for interactive actions.
+    CreatePet.js: Allows users to create a new pet, specifying name, type, and color.
+    PetCard.js: Displays individual pet information and status, handling actions like feeding and petting.
+    App.js: The main application file that organizes routing and component structure.
 
-### Code Splitting
+<br/>
+<br/>
+###🌐 API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The frontend interacts with the backend API through secure HTTP requests, using JWT for authentication and authorization. Some key API requests include:
 
-### Analyzing the Bundle Size
+    Login: POST /virtualpet/auth/login
+    Register: POST /virtualpet/auth/register
+    Fetch Pets: GET /virtualpet/pet/mypets
+    Create Pet: POST /virtualpet/pet/new
+    Feed Pet: POST /virtualpet/pet/feed/{petId}
+    Pet a Pet: POST /virtualpet/pet/pet/{petId}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+All requests require a valid JWT token, which is included in the headers (Authorization: Bearer <token>).
+<br/>
+<br/>
 
-### Making a Progressive Web App
+###🌐 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    Build the project for production:
 
-### Advanced Configuration
+    npm run build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    Deploy the build folder to your preferred hosting environment.
 
-### Deployment
+    Ensure the production environment is configured to connect to the backend API and manage secure token handling.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br/>
+<br/>
 
-### `npm run build` fails to minify
+###🤝 Contributions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Follow these steps to contribute:
+#####1. Fork the repository.
+
+#####2. Create a new branch for your feature:
+
+`git checkout -b feature/NewFeature`
+
+#####3. Make your changes and commit:
+
+`git commit -m 'Add New Feature'`
+
+#####4. Push your changes:
+
+`git push origin feature/NewFeature`
+
+#####5. Create a pull request for review.
