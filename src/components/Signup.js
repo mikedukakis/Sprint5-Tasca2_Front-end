@@ -1,58 +1,60 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import BASE_URL from '../config';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook para redirigir después del registro
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    setError(''); // Limpia errores previos
+
     try {
-      const response = await axios.post(`${BASE_URL}/virtualpet/auth/register`, {
+      const response = await axios.post('http://localhost:8080/virtualpet/auth/register', {
         username,
         password,
       });
-      setMessage('Signup successful! You can now log in.');
+
+      // Si el registro es exitoso, redirige a la página de inicio de sesión
+      console.log("Signup successful", response.data);
+      navigate('/login');
     } catch (error) {
-      setMessage('Signup failed. Please try a different username.');
-      console.error(error);
+      setError('ESignup error. Please try again with another username.');
+      console.error("Error al registrarse:", error);
     }
   };
 
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h2>Registrarse</h2>
       <form onSubmit={handleSignup}>
-        <label>
-          Username:
+        <div>
+          <label>Username:</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        <br />
-        <label>
-          Password:
+        </div>
+        <div>
+          <label>Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <br />
-        <button type="submit">Sign Up</button>
+        </div>
+        <button type="submit">Signup</button>
       </form>
-      {message && (
-        <p>
-          {message} {message.includes('Signup successful') && <Link to="/">log in</Link>}
-        </p>
-      )}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <p>
+        Already have an account? <a href="/login">Iniciar sesión aquí</a>
+      </p>
     </div>
   );
 }
