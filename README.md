@@ -1,126 +1,130 @@
 # 🐾 Virtual Pet Frontend
-<br/>
-<br/>
-A responsive React-based frontend for managing virtual pets, allowing users to interact with their pets, monitor their states, and perform actions such as feeding and petting. This frontend integrates with a Spring Boot backend and communicates through a REST API. 
-<br/>
-<br/>
-###📄 Project Overview
-
-The Virtual Pet Frontend offers users an engaging interface to create and manage their virtual pets. Key features include user authentication, pet management, and interactive pet actions. All actions are reflected in real time with backend synchronization, using a combination of React state management and API calls.
-<br/>
-<br/>
-###💻 Technologies Used
-
-    React
-    JavaScript (ES6+)
-    HTML/CSS
-    React Router
-    Fetch API for REST API communication
-    JSON Web Token (JWT) for secure requests
-    npm for package management
 
 <br/>
 <br/>
-###📋 Requirements
-
-    Node.js v14+
-    npm v6+
-    Access to the backend API (Virtual Pet API) running on localhost:8080
+A responsive web application that provides a user-friendly interface for creating, managing, and interacting with virtual pets. This frontend application enables users to interact with the Virtual Pet API for pet management and user authentication.
 
 <br/>
+
+### 📄 Project Overview
+
+The Virtual Pet Frontend allows users to log in, view their pets, create new pets, and perform actions such as feeding or petting them. This application connects to the Virtual Pet API for backend functionality, utilizing secure tokens for user authentication.
+
 <br/>
-###🛠️ Installation
-#####1. Clone this repository:
+
+### 💻 Technologies Used
+
+- React
+- React Router (for page navigation)
+- Axios (for API requests)
+- CSS Modules (for styling components)
+- JavaScript (ES6+)
+- Webpack (for module bundling)
+
+<br/>
+
+### 📋 Requirements
+
+- Node.js 16 or higher
+- npm 7.20 or higher (comes with Node.js)
+- Internet connection for downloading dependencies
+
+<br/>
+
+### 🛠️ Installation
+
+##### 1. Clone this repository:
 
 `git clone https://github.com/yourusername/virtual-pet-frontend.git`
 
-#####2. Navigate to the project directory:
+##### 2. Navigate to the project directory:
 
 `cd virtual-pet-frontend`
 
-#####3. Install dependencies:
+##### 3. Install dependencies using npm:
 
 `npm install`
 
-#####4. Configure the frontend application:
-
-Ensure the backend API URL (http://localhost:8080) is accessible and update any API base paths in src/config.js if required.
+##### 4. Configure the application:
+        
+Update the API endpoint in `config.js` (or equivalent file) to match the backend server URL.
 
 <br/>
-<br/>
-###▶️ Execution
-#####1. Start the frontend application:
+
+### ▶️ Execution
+
+##### 1. Start the application:
 
 `npm start`
 
-#####2. Access the application in your browser:
+The application will be available at `http://localhost:3000` by default.
 
-http://localhost:3000
-
-<br/>
-<br/>
-###🌐 Frontend Features
-
-    User Authentication: Login and registration functionality integrated with backend JWT authentication.
-    Pet Management: Create, update, and delete pets.
-    Interactive Pet Actions: Users can feed and pet their pets, with the pet’s mood and hunger status reflected in real time.
-    Responsive UI: Optimized for various screen sizes and devices.
+##### 2. Make sure the backend (API) server is running and accessible at the configured URL.
 
 <br/>
-<br/>
-###📚 Key Components and Structure
 
-    Login.js: Manages user login, sending credentials to the backend and storing JWTs in local storage for secure sessions.
-    MyPets.js: The main component displaying the user’s pets, with options for interactive actions.
-    CreatePet.js: Allows users to create a new pet, specifying name, type, and color.
-    PetCard.js: Displays individual pet information and status, handling actions like feeding and petting.
-    App.js: The main application file that organizes routing and component structure.
+### 🌐 Deployment
 
-<br/>
-<br/>
-###🌐 API Integration
+- Prepare the production build using the following command:
 
-The frontend interacts with the backend API through secure HTTP requests, using JWT for authentication and authorization. Some key API requests include:
+`npm run build`
 
-    Login: POST /virtualpet/auth/login
-    Register: POST /virtualpet/auth/register
-    Fetch Pets: GET /virtualpet/pet/mypets
-    Create Pet: POST /virtualpet/pet/new
-    Feed Pet: POST /virtualpet/pet/feed/{petId}
-    Pet a Pet: POST /virtualpet/pet/pet/{petId}
+- Deploy the contents of the `build` directory to a production server.
 
-All requests require a valid JWT token, which is included in the headers (Authorization: Bearer <token>).
-<br/>
-<br/>
-
-###🌐 Deployment
-
-    Build the project for production:
-
-    npm run build
-
-    Deploy the build folder to your preferred hosting environment.
-
-    Ensure the production environment is configured to connect to the backend API and manage secure token handling.
+- Ensure the server is configured to handle the frontend routes properly.
 
 <br/>
+
+### 🐱 User Features
+
+- **Login**: Users can log in using their credentials, which are validated by the backend.
+- **View Pets**: Users can view a list of their virtual pets, each with detailed information.
+- **Create Pet**: Users can add new pets by selecting attributes such as name, type, and color.
+- **Feed Pet**: Users can feed their pets, affecting the pet's hunger state.
+- **Pet Pet**: Users can interact with their pets, affecting the pet’s happiness.
+- **Delete Pet**: Users can delete pets, removing them from the list.
+- **Logout**: Users can securely log out, removing their authentication token.
+
 <br/>
 
-###🤝 Contributions
+### 🔐 Authentication
+
+This frontend manages user authentication using JWT tokens stored in `localStorage`. Upon successful login, tokens are stored and included in headers for subsequent API requests. Tokens are removed upon logout.
+
+<br/>
+
+### 🤝 Contributions
 
 Contributions are welcome! Follow these steps to contribute:
-#####1. Fork the repository.
 
-#####2. Create a new branch for your feature:
+##### 1. Fork the repository.
+##### 2. Create a new branch for your feature:
 
 `git checkout -b feature/NewFeature`
 
-#####3. Make your changes and commit:
+##### 3. Make your changes and commit:
 
 `git commit -m 'Add New Feature'`
 
-#####4. Push your changes:
+##### 4. Push your changes:
 
 `git push origin feature/NewFeature`
 
-#####5. Create a pull request for review.
+##### 5. Create a pull request for review.
+
+<br/>
+
+### 📄 Frontend Components
+
+- **Login**: Handles user login and saves authentication tokens.
+- **Signup**: Allows new users to create accounts.
+- **MyPets**: Displays a list of the user's pets and options for interaction.
+- **PetCard**: A card component that shows pet details and actions such as feed, pet, or delete.
+- **CreatePet**: Provides a form for creating new pets.
+- **LogoutButton**: Logs out the user and clears authentication data.
+
+Each component is designed to interact with the Virtual Pet API, handling both success and error responses to provide real-time feedback to the user.
+
+---
+
+For API-specific actions and further backend functionality, please refer to the backend documentation.
