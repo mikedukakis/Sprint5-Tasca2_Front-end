@@ -10,7 +10,8 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/virtualpet/auth/login', {
+      // Step 1: Login to get access and refresh tokens
+      const loginResponse = await fetch('http://localhost:8080/virtualpet/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,18 +19,45 @@ function Login() {
         body: JSON.stringify({ username, password }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        // Guardar el token y el nombre de User en localStorage
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
-        localStorage.setItem('username', username); // Guardar el nombre de User
-        navigate('/mypets');
+      if (loginResponse.ok) {
+        const loginData = await loginResponse.json();
+        // Save tokens in localStorage
+        localStorage.setItem('access_token', loginData.access_token);
+        localStorage.setItem('refresh_token', loginData.refresh_token);
+
+        // Step 2: Fetch profile information for username and role
+        const profileResponse = await fetch(`http://localhost:8080/virtualpet/user/profile/${username}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${loginData.access_token}`,
+            'Content-Type': 'application/json'
+          },
+        });
+
+        if (profileResponse.ok) {
+          const profileData = await profileResponse.json();
+
+          // Save username and role in localStorage
+          localStorage.setItem('username', profileData.username);
+          localStorage.setItem('role', profileData.role);
+
+          // Step 3: Redirect based on role
+          if (profileData.role === 'ROLE_ADMIN') {
+            navigate('/adminpets');
+          } else {
+            navigate('/mypets');
+          }
+        } else {
+          setError("Failed to retrieve user profile.");
+          console.error("Profile fetch error:", profileResponse.status);
+        }
       } else {
         setError('Wrong credentials. Try again.');
+        console.error("Login error:", loginResponse.status);
       }
     } catch (error) {
       setError('Connection error. Try again later.');
+      console.error("Connection error:", error);
     }
   };
 
